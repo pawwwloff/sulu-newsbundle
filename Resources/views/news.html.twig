@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+ {% block breadcrumb %}
+
+ {% endblock %}
+
+{% block content %}
+    {% if not news.isPublished %}
+        <h1>{{ "alert.message"|trans }}</h1>
+    {% endif %}
+
+    <h1>{{ news.title }}</h1>
+
+    {% if news.cover %}
+        {% set cover = sulu_resolve_media(news.cover.id, 'fr') %}
+        <img src="{{ cover.thumbnails['600x400'] }}" title="{{ cover.title }}"/>
+    {% endif %}
+
+
+    {% include '@Block/html5-blocks.html.twig' with { collection: 'news', blocks: news.content} %}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<form xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/form-1.0.xsd"
+>
+    <key>news_details</key>
+    <properties>
+        <property name="title" type="text_line" mandatory="true">
+            <meta>
+                <title>news.title</title>
+            </meta>
+            <tag name="sulu.rlp.part"/>
+        </property>
+        <property name="routePath" type="route" mandatory="true">
+            <meta>
+                <title>sulu_admin.url</title>
+            </meta>
+            <params>
+                <param name="entity_class" value="Pixel\NewsBundle\Entity\News"/>
+                <param name="route_schema" value="/news/{implode('-', object)}"/>
+            </params>
+        </property>
+        <property name="cover" type="single_media_selection" mandatory="true" colspan="6">
+            <meta>
+                <title>news.cover</title>
+            </meta>
+        </property>
+        <property name="category" type="single_category_selection" mandatory="true" colspan="6">
+            <meta>
+                <title>news.category</title>
+            </meta>
+            <params>
+                <param name="request_parameters" type="collection">
+                    <param name="rootKey" value="news"/>
+                </param>
+            </params>
+        </property>
+        <block name="content" default-type="text" minOccurs="1">
+            <meta>
+                <title>news.content</title>
+            </meta>
+            <params>
+                <param name="settings_form_key" value="page_block_settings" />
+            </params>
+            <types>
+                <xi:include href="sulu-block-bundle://blocks/text.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/youtube.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/link.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/images.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/image_text.xml"/>
+            </types>
+        </block>
+    </properties>
+</form>
