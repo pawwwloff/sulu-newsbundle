@@ -1,0 +1,22 @@
+{
+  "news": "Actus",
+  "news.title": "Titre",
+  "news.isPublished": "Publié ?",
+  "news.category": "Catégorie",
+  "news.cover": "Image de couverture",
+  "news.content": "Contenu",
+  "news.contentDetails": "Détails du contenu",
+  "news.text": "Texte",
+  "news.quote": "Citation",
+  "news.reference": "Référence à la personne citée",
+  "news.searchName": "Actus",
+  "news.newsList": "Liste des actus",
+  "news.emptyNews": "Sélectionner une actu",
+  "sulu_activity.resource.news": "Actus",
+  "sulu_activity.description.news.created": "{userFullName} a créé l'actu \"{resourceTitle}\"",
+  "sulu_activity.description.news.modified": "{userFullName} a modifié l'actu \"{resourceTitle}\"",
+  "sulu_activity.description.news.removed": "{userFullName} a supprimé l'actu \"{resourceTitle}\"",
+  "sulu_activity.description.news.restored": "{userFullName} a restauré l'actu \"{resourceTitle}\"",
+  "news.publish": "Publier",
+  "news.unpublish": "Dépublier"
+}

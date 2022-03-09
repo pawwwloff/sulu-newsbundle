@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<massive-search-mapping xmlns="http://massiveart.io/schema/dic/massive-search-mapping">
+    <mapping class="Pixel\NewsBundle\Entity\News">
+        <index value="news"/>
+        <id property="id"/>
+        <title expr="object.getTitle()"/>
+        <url expr="object.getRoutePath()" />
+        <locale property="locale"/>
+        <fields>
+            <field name="name" expr="object.getTitle()" type="string"/>
+        </fields>
+    </mapping>
+</massive-search-mapping>
