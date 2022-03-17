@@ -34,6 +34,7 @@ class NewsDataProvider extends BaseDataProvider
                 ->enableCategories()
                 ->enableSorting([
                     ['column' => 'translation.title', 'title' => 'news.title'],
+                    ['column' => 'translation.publishedAt', 'title' => 'news.publishedAt']
                 ])
                 ->getConfiguration();
         }

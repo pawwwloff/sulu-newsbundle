@@ -180,6 +180,19 @@ class News
     }
 
     /**
+     * @Serializer\VirtualProperty(name="ext")
+     * @return array|null
+     */
+    public function getExt(): ?array
+    {
+        $translation = $this->getTranslation($this->locale);
+        if (!$translation) {
+            return null;
+        }
+        return ($translation->getSeo()) ? ['seo' => $translation->getSeo()] : ['seo' => ["title" => "", "description" => ""]];
+    }
+
+    /**
      * @param array|null $seo
      * @return self
      */
@@ -249,6 +262,25 @@ class News
             $translation = $this->createTranslation($this->locale);
         }
         $translation->setContent($content);
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeImmutable
+    {
+        $translation = $this->getTranslation($this->locale);
+        if(!$translation){
+            return null;
+        }
+        return $translation->getPublishedAt();
+    }
+
+    public function setPublishedAt(?\DateTimeImmutable $date): self
+    {
+        $translation = $this->getTranslation($this->locale);
+        if(!$translation){
+            $translation = $this->createTranslation($this->locale);
+        }
+        $translation->setPublishedAt($date);
         return $this;
     }
 

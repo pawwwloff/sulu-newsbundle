@@ -18,5 +18,6 @@
   "sulu_activity.description.news.removed": "{userFullName} a supprimé l'actu \"{resourceTitle}\"",
   "sulu_activity.description.news.restored": "{userFullName} a restauré l'actu \"{resourceTitle}\"",
   "news.publish": "Publier",
-  "news.unpublish": "Dépublier"
+  "news.unpublish": "Dépublier",
+  "news.publishedAt": "Publié le"
 }

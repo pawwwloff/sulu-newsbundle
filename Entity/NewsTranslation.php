@@ -56,6 +56,12 @@ class NewsTranslation implements AuditableInterface
     private ?bool $isPublished;
 
     /**
+     * @ORM\Column(type="date_immutable", nullable=true)
+     * @Serializer\Expose()
+     */
+    private ?\DateTimeImmutable $publishedAt;
+
+    /**
      * @ORM\Column(type="json", nullable=true)
      * @Serializer\Expose()
      */
@@ -156,6 +162,21 @@ class NewsTranslation implements AuditableInterface
     public function setIsPublished(?bool $isPublished): void
     {
         $this->isPublished = $isPublished;
+        if($isPublished === true){
+            $this->setPublishedAt(new \DateTimeImmutable());
+        }else{
+            $this->setPublishedAt(null);
+        }
+    }
+
+    public function getPublishedAt(): ?\DateTimeImmutable
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?\DateTimeImmutable $publishedAt): void
+    {
+        $this->publishedAt = $publishedAt;
     }
 
     /**
