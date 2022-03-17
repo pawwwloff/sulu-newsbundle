@@ -265,6 +265,25 @@ class News
         return $this;
     }
 
+    public function getPublishedAt(): ?\DateTimeImmutable
+    {
+        $translation = $this->getTranslation($this->locale);
+        if(!$translation){
+            return null;
+        }
+        return $translation->getPublishedAt();
+    }
+
+    public function setPublishedAt(?\DateTimeImmutable $date): self
+    {
+        $translation = $this->getTranslation($this->locale);
+        if(!$translation){
+            $translation = $this->createTranslation($this->locale);
+        }
+        $translation->setPublishedAt($date);
+        return $this;
+    }
+
     /**
      * @return array
      */
