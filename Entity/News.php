@@ -180,6 +180,19 @@ class News
     }
 
     /**
+     * @Serializer\VirtualProperty(name="ext")
+     * @return array|null
+     */
+    public function getExt(): ?array
+    {
+        $translation = $this->getTranslation($this->locale);
+        if (!$translation) {
+            return null;
+        }
+        return ($translation->getSeo()) ? ['seo' => $translation->getSeo()] : ['seo' => ["title" => "", "description" => ""]];
+    }
+
+    /**
      * @param array|null $seo
      * @return self
      */

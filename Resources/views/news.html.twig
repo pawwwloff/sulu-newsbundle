@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+ {% block meta %}
+{% include "@SuluWebsite/Extension/seo.html.twig" with {
+    "seo": news.seo|default([]),
+    "content": content|default([]),
+    "localizations": localizations|default([]),
+    "shadowBaseLocale": shadowBaseLocale|default(),
+    "defaultLocale": app.request.locale
+} %}
+ {% endblock %}
+
  {% block breadcrumb %}
 
  {% endblock %}
