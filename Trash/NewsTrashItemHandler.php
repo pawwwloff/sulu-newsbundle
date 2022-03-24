@@ -58,6 +58,7 @@ class NewsTrashItemHandler implements StoreTrashItemHandlerInterface, RestoreTra
             "content" => $resource->getContent(),
             "coverId" => $cover ? $cover->getId() : null,
             "categoryId" => $category ? $category->getId() : null,
+            "publishedAt" => $resource->getPublishedAt()
         ];
         return $this->trashItemRepository->create(
             News::RESOURCE_KEY,
@@ -84,6 +85,9 @@ class NewsTrashItemHandler implements StoreTrashItemHandlerInterface, RestoreTra
         $actu->setContent($data['content']);
         $actu->setCover($this->entityManager->find(MediaInterface::class, $data['coverId']));
         $actu->setCategory($this->entityManager->find(CategoryInterface::class, $data['categoryId']));
+        if(isset($data['publishedAt'])){
+            $actu->setPublishedAt(new \DateTimeImmutable($data['publishedAt']['date']));
+        }
         $this->domainEventCollector->collect(
             new NewsRestoredEvent($actu, $data)
         );

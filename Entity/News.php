@@ -265,6 +265,10 @@ class News
         return $this;
     }
 
+    /**
+     * @Serializer\VirtualProperty(name="published_at")
+     * @return \DateTimeImmutable|null
+     */
     public function getPublishedAt(): ?\DateTimeImmutable
     {
         $translation = $this->getTranslation($this->locale);
@@ -283,6 +287,29 @@ class News
         $translation->setPublishedAt($date);
         return $this;
     }
+
+    /**
+     * @Serializer\VirtualProperty(name="excerpt")
+     * @return array|null
+     */
+    /*public function getExcerpt(): ?array
+    {
+        $translation = $this->getTranslation($this->locale);
+        if(!$translation){
+            return null;
+        }
+        return $translation->getExcerpt();
+    }
+
+    public function setExcerpt(?array $excerpt): self
+    {
+        $translation = $this->getTranslation($this->locale);
+        if(!$translation){
+            $translation = $this->createTranslation($this->locale);
+        }
+        $translation->setExcerpt($excerpt);
+        return $this;
+    }*/
 
     /**
      * @return array
