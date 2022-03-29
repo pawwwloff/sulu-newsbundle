@@ -1,3 +1,5 @@
 alert.message: /!\La page n'est pas visible sur le site/!\
 news.unpublish: Dépublier
 news.publish: Publier
+news: Actus
+news.emptyNews: Sélectionner une actu

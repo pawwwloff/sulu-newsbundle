@@ -140,6 +140,7 @@ class NewsController extends AbstractRestController implements ClassResourceInte
         $categoryId = (isset($data['category']['id'])) ? $data['category']['id'] : $data['category'];
         $isPublished = $data['isPublished'] ?? false;
         $seo = (isset($data['ext']['seo'])) ? $data['ext']['seo'] : null;
+        $publishedAt = $data['publishedAt'] ?? null;
 
         $entity->setTitle($data['title']);
         $entity->setRoutePath($data['routePath']);
@@ -148,6 +149,7 @@ class NewsController extends AbstractRestController implements ClassResourceInte
         $entity->setCategory($this->categoryManager->findById($categoryId));
         $entity->setContent($data['content']);
         $entity->setSeo($seo);
+        $entity->setPublishedAt($publishedAt ? new \DateTimeImmutable($publishedAt) : new \DateTimeImmutable());
     }
 
     protected function updateRoutesForEntity(News $entity): void
