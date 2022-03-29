@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.3 (29/03/2022)
+
++ Ajout du lien
++ Modification de la date de publication
+
 ## 2.4.2 (24/03/2022)
 
 + Modification mise en page détails news
