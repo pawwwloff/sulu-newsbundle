@@ -116,5 +116,12 @@
             <tag name="task.handler"/>
         </service>
 
+        <!--Link-->
+        <service id="sulu_news.news_link_provider" class="Pixel\NewsBundle\Link\NewsLinkProvider">
+            <argument type="service" id="news.news_repository"/>
+            <argument type="service" id="translator.default"/>
+            <tag name="sulu.link.provider" alias="actus"/>
+        </service>
+
     </services>
 </container>

@@ -21,6 +21,11 @@
                 <param name="route_schema" value="/news/{implode('-', object)}"/>
             </params>
         </property>
+        <property name="publishedAt" type="date">
+            <meta>
+                <title>news.publishedAt</title>
+            </meta>
+        </property>
         <property name="cover" type="single_media_selection" mandatory="true" colspan="6">
             <meta>
                 <title>news.cover</title>
