@@ -26,7 +26,7 @@
                 <title>news.publishedAt</title>
             </meta>
         </property>
-        <property name="cover" type="single_media_selection" mandatory="true" colspan="6">
+        <property name="cover" type="single_media_selection" colspan="6">
             <meta>
                 <title>news.cover</title>
             </meta>

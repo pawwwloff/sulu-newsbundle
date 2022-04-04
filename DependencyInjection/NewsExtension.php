@@ -38,6 +38,11 @@ class NewsExtension extends Extension implements PrependExtensionInterface
                                 'list' => 'news.cget_news',
                             ],
                         ],
+                        'news_settings' => [
+                            'routes' => [
+                                'detail' => 'news.get_news-settings'
+                            ]
+                        ]
                     ],
                     'field_type_options' => [
                         'selection' => [

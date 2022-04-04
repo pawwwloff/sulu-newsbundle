@@ -43,7 +43,7 @@ class News
      * @ORM\JoinColumn(onDelete="SET NULL")
      * @Serializer\Expose()
      */
-    private MediaInterface $cover;
+    private ?MediaInterface $cover;
 
     /**
      * @var Collection<string, NewsTranslation>
@@ -236,17 +236,17 @@ class News
     }
 
     /**
-     * @return MediaInterface
+     * @return MediaInterface|null
      */
-    public function getCover(): MediaInterface
+    public function getCover(): ?MediaInterface
     {
         return $this->cover;
     }
 
     /**
-     * @param MediaInterface $cover
+     * @param MediaInterface|null $cover
      */
-    public function setCover(MediaInterface $cover): void
+    public function setCover(?MediaInterface $cover): void
     {
         $this->cover = $cover;
     }

@@ -30,6 +30,13 @@ class NewsController extends AbstractController
 
     public function indexAction(News $news, $attributes = [], $preview = false, $partial = false): Response
     {
+        if (!$news->getSeo() || (isset($news->getSeo()['title']) && !$news->getSeo()['title'])) {
+            $seo = [
+                "title" => $news->getTitle(),
+            ];
+
+            $news->setSeo($seo);
+        }
         $parameters = $this->get('sulu_website.resolver.template_attribute')->resolve([
             'news' => $news,
             'localizations' => $this->getLocalizationsArrayForEntity($news),

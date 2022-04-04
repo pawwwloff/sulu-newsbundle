@@ -12,6 +12,8 @@
   "news.searchName": "Actus",
   "news.newsList": "Liste des actus",
   "news.emptyNews": "Sélectionner une actu",
+  "news.settings": "Gestion des actus",
+  "news_settings.defaultImage": "Image par défaut",
   "sulu_activity.resource.news": "Actus",
   "sulu_activity.description.news.created": "{userFullName} a créé l'actu \"{resourceTitle}\"",
   "sulu_activity.description.news.modified": "{userFullName} a modifié l'actu \"{resourceTitle}\"",
