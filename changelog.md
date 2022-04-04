@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.4 (04/04/2022)
+
++ Ajout configuration
++ Image de couverture non obligatoire
+- Fix meta title
+
 ## 2.4.3 (29/03/2022)
 
 + Ajout du lien
