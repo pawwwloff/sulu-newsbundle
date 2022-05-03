@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.5 (03/05/2022)
+
+- Correction multilingues
+
 ## 2.4.4 (04/04/2022)
 
 + Ajout configuration

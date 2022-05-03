@@ -73,7 +73,14 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
 
     public function findByFilters($filters, $page, $pageSize, $limit, $locale, $options = []): array
     {
-        return $this->getPublishedNews($filters, $locale);
+        $entities = $this->getPublishedNews($filters, $locale);
+
+        return \array_map(
+            function (News $entity) use ($locale) {
+                return $entity->setLocale($locale);
+            },
+            $entities
+        );
     }
 
     public function getPublishedNews(array $filters, string $locale): array
