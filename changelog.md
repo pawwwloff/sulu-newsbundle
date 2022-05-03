@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.6 (03/05/2022)
+
++ Ajout du readme
++ Ajout de la dépendance avec pixeldev/sulu-block-bundle
+
 ## 2.4.5 (03/05/2022)
 
 - Correction multilingues
