@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Pixel\NewsBundle\Content;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Pixel\NewsBundle\Entity\News;
 use Sulu\Component\Serializer\ArraySerializerInterface;
+use Sulu\Component\SmartContent\DataProviderResult;
 use Sulu\Component\SmartContent\ItemInterface;
 use Sulu\Component\SmartContent\Orm\BaseDataProvider;
 use Sulu\Component\SmartContent\Orm\DataProviderRepositoryInterface;
@@ -17,10 +20,12 @@ class NewsDataProvider extends BaseDataProvider
      */
     private RequestStack $requestStack;
 
-    public function __construct(DataProviderRepositoryInterface $repository, ArraySerializerInterface $serializer, RequestStack $requestStack)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(DataProviderRepositoryInterface $repository, ArraySerializerInterface $serializer, RequestStack $requestStack, EntityManagerInterface $entityManager)
     {
         parent::__construct($repository, $serializer);
-
+        $this->entityManager = $entityManager;
         $this->requestStack = $requestStack;
     }
 
@@ -40,6 +45,25 @@ class NewsDataProvider extends BaseDataProvider
         }
 
         return $this->configuration;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function resolveResourceItems(
+        array $filters,
+        array $propertyParameter,
+        array $options = [],
+              $limit = null,
+              $page = 1,
+              $pageSize = null
+    ) {
+
+        $locale = $options['locale'];
+        $request = $this->requestStack->getCurrentRequest();
+        $options['page'] = $request->get('p');
+        $news = $this->entityManager->getRepository(News::class)->findByFilters($filters, $page, $pageSize, $limit, $locale, $options);
+        return new DataProviderResult($news, $this->entityManager->getRepository(News::class)->hasNextPage($filters, $page, $pageSize, $limit, $locale, $options));
     }
 
     /**
@@ -70,8 +94,8 @@ class NewsDataProvider extends BaseDataProvider
     protected function getOptions(array $propertyParameter, array $options = [])
     {
         $request = $this->requestStack->getCurrentRequest();
-
         $result = [
+            'page' => $request->get('p'),
             'type' => $request->get('type'),
         ];
 

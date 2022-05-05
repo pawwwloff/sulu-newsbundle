@@ -73,7 +73,8 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
 
     public function findByFilters($filters, $page, $pageSize, $limit, $locale, $options = []): array
     {
-        $entities = $this->getPublishedNews($filters, $locale);
+
+        $entities = $this->getPublishedNews($filters, $locale, $page, $pageSize, $limit, $options);
 
         return \array_map(
             function (News $entity) use ($locale) {
@@ -83,11 +84,32 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
         );
     }
 
-    public function getPublishedNews(array $filters, string $locale): array
+    public function hasNextPage(array $filters, ?int $page, ?string  $pageSize, ?int $limit, string $locale, array  $options = []):bool
     {
+        $pageCurrent = (key_exists('page', $options)) ? (int)$options['page'] : 0;
+        $totalArticles = $this->createQueryBuilder('n')
+
+            ->select('count(n.id)')
+            ->leftJoin('n.translations', 'translation')
+            ->where('translation.isPublished = 1')
+            ->andWhere('translation.locale = :locale')->setParameter('locale', $locale)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        if ((int)($limit*$pageCurrent)+$limit < (int)$totalArticles) return true; else return false;
+
+    }
+
+    public function getPublishedNews(array $filters, string $locale,  ?int $page, $pageSize,  ?int $limit, array $options): array
+    {
+        $pageCurrent = (key_exists('page', $options)) ? (int)$options['page'] : 0;
+
         $query = $this->createQueryBuilder('n')
             ->leftJoin('n.translations', 'translation')
-            ->where('translation.isPublished = 1');
+            ->where('translation.isPublished = 1')
+            ->andWhere('translation.locale = :locale')->setParameter('locale', $locale)
+            ->setMaxResults($limit)
+            ->setFirstResult($pageCurrent*$limit);
         if (isset($filters['sortBy'])) $query->orderBy($filters['sortBy'], $filters['sortMethod']);
         $news = $query->getQuery()->getResult();
         if (!$news) {

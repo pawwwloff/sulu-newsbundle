@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.7 (05/05/2022)
+
++ Ajout pagination
+
 ## 2.4.6 (03/05/2022)
 
 + Ajout du readme
