@@ -78,10 +78,11 @@
             </argument>
         </service>
 
-        <service id="news.smart_content.data_provider.example" class="Pixel\NewsBundle\Content\NewsDataProvider">
+        <service id="news.smart_content.data_provider" class="Pixel\NewsBundle\Content\NewsDataProvider">
             <argument type="service" id="news.news_repository"/>
             <argument type="service" id="sulu_core.array_serializer"/>
             <argument type="service" id="request_stack"/>
+            <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="sulu.smart_content.data_provider" alias="news"/>
         </service>
 
