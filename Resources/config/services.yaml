@@ -10,3 +10,9 @@ services:
     autowire: true
     tags:
       - {name: twig.extension}
+
+  Pixel\NewsBundle\Twig\NewsExtension:
+    public: false
+    autowire: true
+    tags:
+      - {name: twig.extension}
