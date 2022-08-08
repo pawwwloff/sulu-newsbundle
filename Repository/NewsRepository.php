@@ -58,6 +58,18 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    public function getLatestNews(int $limit, string $locale)
+    {
+        $query = $this->createQueryBuilder("n")
+            ->leftJoin("n.translations", "t")
+            ->where("t.isPublished = 1")
+            ->andWhere("t.locale = :locale")
+            ->orderBy("t.publishedAt", "desc")
+            ->setMaxResults($limit)
+            ->setParameter("locale", $locale);
+        return $query->getQuery()->getResult();
+    }
+
     /**
      * {@inheritdoc}
      */
