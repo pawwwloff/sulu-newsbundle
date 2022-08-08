@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.8 (08/08/2022)
+
++ Ajout fonction twig pour récupérer les dernières actus
+- Fix gestion des liens
+
 ## 2.4.7 (05/05/2022)
 
 + Ajout pagination
