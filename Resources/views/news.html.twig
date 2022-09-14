@@ -21,7 +21,7 @@
             <h1 class="text-2xl uppercase font-light text-gray-900 mb-8">{{ news.title }}</h1>
 
             {% if news.cover %}
-                {% set cover = sulu_resolve_media(news.cover.id, 'fr') %}
+                {% set cover = sulu_resolve_media(news.cover.id, app.request.locale) %}
                 <img src="{{ cover.thumbnails['large'] }}" title="{{ cover.title }}" class="rounded-lg mb-8"/>
             {% endif %}
 

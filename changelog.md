@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.10 (14/09/2022)
+
++ La fonction Twig retourne bien les derniers articles de la langue courante
++ Gestion des médias via la locale pour le front
+- Fix l'affichage du SEO pour le backend
+
 ## 2.4.9 (14/09/2022)
 
 + Compatible php 8

@@ -1,6 +1,6 @@
 <div>
     {% for new in news %}
-        {% set cover = sulu_resolve_media(new.cover.id, 'fr') %}
+        {% set cover = sulu_resolve_media(new.cover.id, app.request.locale) %}
         <img src="{{ cover.thumnails["991x"] }}" alt="{{ new.title }}">
         <h3 class="block text-center text-base font-bold">{{ new.title }}</h3>
         <p class="block text-center">{{ new.publishedAt|date("d/m/Y") }} {#- {{ new.category }}#}</p>
