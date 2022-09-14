@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.9 (14/09/2022)
+
++ Compatible php 8
++ Meilleures gestions du multilingue pour le backend
+
 ## 2.4.8 (08/08/2022)
 
 + Ajout fonction twig pour récupérer les dernières actus
