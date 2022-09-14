@@ -10,6 +10,14 @@
         </join>
     </joins>
 
+    <joins name="defaultTranslation">
+        <join>
+            <entity-name>Pixel\NewsBundle\Entity\NewsTranslationDefault</entity-name>
+            <field-name>Pixel\NewsBundle\Entity\News.translations</field-name>
+            <condition>Pixel\NewsBundle\Entity\NewsTranslationDefault.locale = Pixel\NewsBundle\Entity\News.defaultLocale</condition>
+        </join>
+    </joins>
+
     <joins name="creator" ref="translation">
         <join>
             <entity-name>%sulu.model.user.class%_creator</entity-name>
@@ -20,6 +28,8 @@
             <field-name>%sulu.model.user.class%_creator.contact</field-name>
         </join>
     </joins>
+
+
 
     <joins name="changer" ref="translation">
         <join>
@@ -37,11 +47,26 @@
             <field-name>id</field-name>
             <entity-name>Pixel\NewsBundle\Entity\News</entity-name>
         </property>
+        <case-property
+                name="title"
+                visibility="always"
+                searchability="yes"
+                type="string"
+                translation="news.title"
+              >
+            <field>
+                <field-name>title</field-name>
+                <entity-name>Pixel\NewsBundle\Entity\NewsTranslation</entity-name>
+                <joins ref="translation"/>
+            </field>
+            <field>
+                <field-name>title</field-name>
+                <entity-name>Pixel\NewsBundle\Entity\NewsTranslationDefault</entity-name>
+                <joins ref="defaultTranslation"/>
+            </field>
+        </case-property>
 
-        <property name="title" visibility="always" searchability="yes" type="string" translation="news.title">
-            <field-name>title</field-name>
-            <entity-name>Pixel\NewsBundle\Entity\NewsTranslation</entity-name>
-        </property>
+
 
         <property name="isPublished" visibility="yes" translation="news.isPublished" type="bool">
             <field-name>isPublished</field-name>

@@ -23,6 +23,7 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
     public function create(string $locale): News
     {
         $news = new News();
+        $news->setDefaultLocale($locale);
         $news->setLocale($locale);
         return $news;
     }
