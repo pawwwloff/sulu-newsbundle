@@ -30,14 +30,14 @@ class NewsExtension extends AbstractExtension
         ];
     }
 
-    public function getLatestNewsHtml(int $limit = 3)
+    public function getLatestNewsHtml(int $limit = 3, $locale = 'fr')
     {
-        $news = $this->entityManager->getRepository(News::class)->getLatestNews($limit, $this->request->getMainRequest()->getLocale());
+        $news = $this->entityManager->getRepository(News::class)->findByFilters([], 0, $limit, $limit, $locale);;
         return $this->environment->render("@News/twig/news.html.twig", ["news" => $news]);
     }
 
-    public function getLatestNews(int $limit = 3)
+    public function getLatestNews(int $limit = 3, $locale = 'fr')
     {
-        return $this->entityManager->getRepository(News::class)->getLatestNews($limit, $this->request->getMainRequest()->getLocale());
+        return $this->entityManager->getRepository(News::class)->findByFilters([], 0, $limit, $limit, $locale);
     }
 }
