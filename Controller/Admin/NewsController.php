@@ -104,12 +104,18 @@ class NewsController extends AbstractRestController implements ClassResourceInte
             throw new NotFoundHttpException();
         }
 
+
+        if ($item->getTitle() === null and $item->getDefaultLocale()) {
+            $request->setMethod($item->getDefaultLocale());
+            $item = $this->load($id, $request, $item->getDefaultLocale());
+        }
+
         return $this->handleView($this->view($item));
     }
 
-    protected function load(int $id, Request $request): ?News
+    protected function load(int $id, Request $request, $defaultLocal = null): ?News
     {
-        return $this->repository->findById($id, (string)$this->getLocale($request));
+        return $this->repository->findById($id, ($defaultLocal) ? $defaultLocal : (string)$this->getLocale($request));
     }
 
     public function putAction(Request $request, int $id): Response
@@ -120,6 +126,8 @@ class NewsController extends AbstractRestController implements ClassResourceInte
         }
 
         $data = $request->request->all();
+
+
         $this->mapDataToEntity($data, $item);
         $this->updateRoutesForEntity($item);
         $this->domainEventCollector->collect(
@@ -238,18 +246,22 @@ class NewsController extends AbstractRestController implements ClassResourceInte
     public function postTriggerAction(int $id, Request $request): Response
     {
         $action = $this->getRequestParameter($request, 'action', true);
-        //$locale = $this->getRequestParameter($request, 'locale', true);
+        $locale = $this->getRequestParameter($request, 'locale', true);
 
         try {
             switch ($action) {
                 case 'enable':
-                    $item = $this->entityManager->getReference(News::class, $id);
+                    /** @var News $item */
+                    $item = $this->entityManager->getRepository(News::class)->find($id);
+                    $item->setLocale($locale);
                     $item->setIsPublished(true);
                     $this->entityManager->persist($item);
                     $this->entityManager->flush();
                     break;
                 case 'disable':
-                    $item = $this->entityManager->getReference(News::class, $id);
+                    /** @var News $item */
+                    $item = $this->entityManager->getRepository(News::class)->find($id);
+                    $item->setLocale($locale);
                     $item->setIsPublished(false);
                     $this->entityManager->persist($item);
                     $this->entityManager->flush();

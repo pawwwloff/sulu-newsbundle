@@ -52,6 +52,13 @@ class News
      */
     private $translations;
 
+
+    /**
+     * @var string
+     * * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $defaultLocale;
+
     /**
      * @var string
      */
@@ -292,7 +299,7 @@ class News
      * @Serializer\VirtualProperty(name="excerpt")
      * @return array|null
      */
-    /*public function getExcerpt(): ?array
+    public function getExcerpt(): ?array
     {
         $translation = $this->getTranslation($this->locale);
         if(!$translation){
@@ -309,7 +316,7 @@ class News
         }
         $translation->setExcerpt($excerpt);
         return $this;
-    }*/
+    }
 
     /**
      * @return array
@@ -329,4 +336,23 @@ class News
         $this->locale = $locale;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getDefaultLocale(): ?string
+    {
+        return $this->defaultLocale;
+    }
+
+    /**
+     * @param string $defaultLocale
+     */
+    public function setDefaultLocale(string $defaultLocale): void
+    {
+        $this->defaultLocale = $defaultLocale;
+    }
+
+
+
 }

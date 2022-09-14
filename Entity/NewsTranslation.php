@@ -73,6 +73,12 @@ class NewsTranslation implements AuditableInterface
      */
     private array $content;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     * @Serializer\Expose()
+     */
+    private ?array $excerpt = null;
+
     public function __construct(News $news, string $locale)
     {
         $this->news = $news;
@@ -151,9 +157,9 @@ class NewsTranslation implements AuditableInterface
     /**
      * @return bool
      */
-    public function isPublished(): bool
+    public function isPublished(): ?bool
     {
-        return $this->isPublished;
+        return $this->isPublished ?? '';
     }
 
     /**
@@ -198,9 +204,9 @@ class NewsTranslation implements AuditableInterface
     /**
      * @return array
      */
-    public function getContent(): array
+    public function getContent(): ?array
     {
-        return $this->content;
+        return $this->content ?? [];
     }
 
     /**
@@ -209,5 +215,21 @@ class NewsTranslation implements AuditableInterface
     public function setContent(array $content): void
     {
         $this->content = $content;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getExcerpt(): ?array
+    {
+        return $this->excerpt;
+    }
+
+    /**
+     * @param array|null $excerpt
+     */
+    public function setExcerpt(?array $excerpt): void
+    {
+        $this->excerpt = $excerpt;
     }
 }
