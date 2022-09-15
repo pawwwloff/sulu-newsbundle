@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.11 (15/09/2022)
+
+- Fix génération des routes
+
 ## 2.4.10 (14/09/2022)
 
 + La fonction Twig retourne bien les derniers articles de la langue courante
