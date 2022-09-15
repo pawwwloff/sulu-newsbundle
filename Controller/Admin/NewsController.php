@@ -129,7 +129,7 @@ class NewsController extends AbstractRestController implements ClassResourceInte
 
 
         $this->mapDataToEntity($data, $item);
-        $this->updateRoutesForEntity($item);
+        $this->updateRoutesForEntity($item, $request->query->get('locale'));
         $this->domainEventCollector->collect(
             new NewsModifiedEvent($item, $data)
         );
@@ -160,17 +160,14 @@ class NewsController extends AbstractRestController implements ClassResourceInte
         $entity->setPublishedAt($publishedAt ? new \DateTimeImmutable($publishedAt) : new \DateTimeImmutable());
     }
 
-    protected function updateRoutesForEntity(News $entity): void
+    protected function updateRoutesForEntity(News $entity, string $locale): void
     {
-        // create route for all locales of the application because event entity is not localized
-        foreach ($this->webspaceManager->getAllLocales() as $locale) {
-            $this->routeManager->createOrUpdateByAttributes(
-                News::class,
-                (string)$entity->getId(),
-                $locale,
-                $entity->getRoutePath(),
-            );
-        }
+        $this->routeManager->createOrUpdateByAttributes(
+            News::class,
+            (string)$entity->getId(),
+            $locale,
+            $entity->getRoutePath(),
+        );
     }
 
     protected function save(News $news): void
@@ -184,7 +181,7 @@ class NewsController extends AbstractRestController implements ClassResourceInte
         $data = $request->request->all();
         $this->mapDataToEntity($data, $item);
         $this->save($item);
-        $this->updateRoutesForEntity($item);
+        $this->updateRoutesForEntity($item, $request->query->get('locale'));
         $this->domainEventCollector->collect(
             new NewsCreatedEvent($item, $data)
         );
