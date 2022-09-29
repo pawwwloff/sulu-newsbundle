@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.12 (29/09/2022)
+
+- Fix ordre des actus au niveau des listes
+- Fix smart content pour le filtre des catégories
+
 ## 2.4.11 (15/09/2022)
 
 - Fix génération des routes
