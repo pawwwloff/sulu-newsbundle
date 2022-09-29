@@ -64,12 +64,6 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
      */
     public function appendJoins(QueryBuilder $queryBuilder, $alias, $locale)
     {
-        $queryBuilder->addSelect('category')->leftJoin($alias . '.category', 'category');
-    }
-
-    public function appendCategoriesRelation(QueryBuilder $queryBuilder, $alias)
-    {
-        return $alias . '.category';
     }
 
     public function findByFilters($filters, $page, $pageSize, $limit, $locale, $options = []): array
@@ -109,8 +103,38 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
             ->leftJoin('n.translations', 'translation')
             ->where('translation.isPublished = 1')
             ->andWhere('translation.locale = :locale')->setParameter('locale', $locale)
+            ->orderBy('translation.publishedAt', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($pageCurrent*$limit);
+
+        if(!empty($filters['categories'])){
+            $i = 0;
+            if($filters['categoryOperator'] === "and"){
+                $andWhere = "";
+                foreach($filters['categories'] as $category){
+                    if($i === 0){
+                        $andWhere .= "n.category = :category" . $i;
+                    }else{
+                        $andWhere .= " AND n.category = :category" . $i;
+                    }
+                    $query->setParameter("category" . $i, $category);
+                    $i++;
+                }
+                $query->andWhere($andWhere);
+            }else if($filters['categoryOperator'] === "or"){
+                $orWhere = "";
+                foreach($filters['categories'] as $category){
+                    if($i === 0){
+                        $orWhere .= "n.category = :category" . $i;
+                    }else{
+                        $orWhere .= " OR n.category = :category" . $i;
+                    }
+                    $query->setParameter("category" . $i, $category);
+                    $i++;
+                }
+                $query->andWhere($orWhere);
+            }
+        }
         if (isset($filters['sortBy'])) $query->orderBy($filters['sortBy'], $filters['sortMethod']);
         $news = $query->getQuery()->getResult();
         if (!$news) {
