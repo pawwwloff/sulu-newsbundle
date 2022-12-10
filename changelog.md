@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.4.13 (10/02/2022)
+
++ Ajout de nouveaux blocs : avant/après, deux et trois colonnes, code, citation, vidéo et texte
++ Modification colonne backend pour la date de publication au niveau des listings des news
+- Fix restauration d'une actu
+- Fix pagination
+
 ## 2.4.12 (29/09/2022)
 
 - Fix ordre des actus au niveau des listes

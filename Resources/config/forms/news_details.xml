@@ -54,6 +54,12 @@
                 <xi:include href="sulu-block-bundle://blocks/link.xml"/>
                 <xi:include href="sulu-block-bundle://blocks/images.xml"/>
                 <xi:include href="sulu-block-bundle://blocks/image_text.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/quote.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/image_before_after.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/two_columns.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/three_columns.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/highlight.xml"/>
+                <xi:include href="sulu-block-bundle://blocks/video_text.xml"/>
             </types>
         </block>
     </properties>
