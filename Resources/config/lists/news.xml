@@ -29,8 +29,6 @@
         </join>
     </joins>
 
-
-
     <joins name="changer" ref="translation">
         <join>
             <entity-name>%sulu.model.user.class%_changer</entity-name>
@@ -66,15 +64,13 @@
             </field>
         </case-property>
 
-
-
         <property name="isPublished" visibility="yes" translation="news.isPublished" type="bool">
             <field-name>isPublished</field-name>
             <entity-name>Pixel\NewsBundle\Entity\NewsTranslation</entity-name>
         </property>
 
-        <property name="created" translation="sulu_admin.created" type="datetime" visibility="yes">
-            <field-name>created</field-name>
+        <property name="publishedAt" translation="news.publishedAt" type="datetime" visibility="yes">
+            <field-name>publishedAt</field-name>
             <entity-name>Pixel\NewsBundle\Entity\NewsTranslation</entity-name>
 
             <filter type="datetime"/>

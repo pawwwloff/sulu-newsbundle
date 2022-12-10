@@ -83,7 +83,9 @@ class NewsTrashItemHandler implements StoreTrashItemHandlerInterface, RestoreTra
         $actu->setIsPublished($data['isPublished']);
         $actu->setSeo($data['seo']);
         $actu->setContent($data['content']);
-        $actu->setCover($this->entityManager->find(MediaInterface::class, $data['coverId']));
+        if($data['coverId']){
+            $actu->setCover($this->entityManager->find(MediaInterface::class, $data['coverId']));
+        }
         $actu->setCategory($this->entityManager->find(CategoryInterface::class, $data['categoryId']));
         if(isset($data['publishedAt'])){
             $actu->setPublishedAt(new \DateTimeImmutable($data['publishedAt']['date']));

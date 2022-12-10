@@ -79,11 +79,10 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
         );
     }
 
-    public function hasNextPage(array $filters, ?int $page, ?string  $pageSize, ?int $limit, string $locale, array  $options = []):bool
+    public function hasNextPage(array $filters, ?int $page, ?int $pageSize, ?int $limit, string $locale, array $options = []): bool
     {
         $pageCurrent = (key_exists('page', $options)) ? (int)$options['page'] : 0;
         $totalArticles = $this->createQueryBuilder('n')
-
             ->select('count(n.id)')
             ->leftJoin('n.translations', 'translation')
             ->where('translation.isPublished = 1')
@@ -91,11 +90,11 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
             ->getQuery()
             ->getSingleScalarResult();
 
-        if ((int)($limit*$pageCurrent)+$limit < (int)$totalArticles) return true; else return false;
+        if ((int)($limit * $pageCurrent) + $limit < (int)$totalArticles) return true; else return false;
 
     }
 
-    public function getPublishedNews(array $filters, string $locale,  ?int $page, $pageSize,  ?int $limit, array $options): array
+    public function getPublishedNews(array $filters, string $locale, ?int $page, $pageSize, ?int $limit, array $options): array
     {
         $pageCurrent = (key_exists('page', $options)) ? (int)$options['page'] : 0;
 
@@ -105,28 +104,28 @@ class NewsRepository extends EntityRepository implements DataProviderRepositoryI
             ->andWhere('translation.locale = :locale')->setParameter('locale', $locale)
             ->orderBy('translation.publishedAt', 'DESC')
             ->setMaxResults($limit)
-            ->setFirstResult($pageCurrent*$limit);
+            ->setFirstResult($pageCurrent * $limit);
 
-        if(!empty($filters['categories'])){
+        if (!empty($filters['categories'])) {
             $i = 0;
-            if($filters['categoryOperator'] === "and"){
+            if ($filters['categoryOperator'] === "and") {
                 $andWhere = "";
-                foreach($filters['categories'] as $category){
-                    if($i === 0){
+                foreach ($filters['categories'] as $category) {
+                    if ($i === 0) {
                         $andWhere .= "n.category = :category" . $i;
-                    }else{
+                    } else {
                         $andWhere .= " AND n.category = :category" . $i;
                     }
                     $query->setParameter("category" . $i, $category);
                     $i++;
                 }
                 $query->andWhere($andWhere);
-            }else if($filters['categoryOperator'] === "or"){
+            } else if ($filters['categoryOperator'] === "or") {
                 $orWhere = "";
-                foreach($filters['categories'] as $category){
-                    if($i === 0){
+                foreach ($filters['categories'] as $category) {
+                    if ($i === 0) {
                         $orWhere .= "n.category = :category" . $i;
-                    }else{
+                    } else {
                         $orWhere .= " OR n.category = :category" . $i;
                     }
                     $query->setParameter("category" . $i, $category);
