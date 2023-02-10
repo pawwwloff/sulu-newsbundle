@@ -1,6 +1,11 @@
 # Changelog
 
-## 2.4.13 (10/02/2022)
+## 2.4.14 (10/02/2023)
+
++ add github actions
+- fix pagination
+
+## 2.4.13 (10/12/2022)
 
 + Ajout de nouveaux blocs : avant/après, deux et trois colonnes, code, citation, vidéo et texte
 + Modification colonne backend pour la date de publication au niveau des listings des news
