@@ -1,16 +1,16 @@
 {
-  "name": "pixelopen/sulu-newsbundle",
+  "name": "pawwwloff/sulu-newsbundle",
   "type": "sulu-bundle",
   "description": "Manage news for Sulu",
   "keywords": [
     "sulu",
     "suluCms"
   ],
-  "homepage": "https://github.com/Pixel-Open/sulu-newsbundle",
+  "homepage": "https://github.com/pawwwloff/sulu-newsbundle",
   "license": "MIT",
   "authors": [
     {
-      "name": "Pixel Open"
+      "name": "Pawwwloff"
     }
   ],
   "require": {
