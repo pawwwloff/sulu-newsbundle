@@ -40,7 +40,7 @@ Enable the bundle by adding it to the list of registered bundles in the `config/
  ```php
  return [
      /* ... */
-     Pixel\NewsBundle\NewsBundle::class => ['all' => true],
+     Pixel\NewsBundle\HawexNewsBundle::class => ['all' => true],
  ];
  ```
 
